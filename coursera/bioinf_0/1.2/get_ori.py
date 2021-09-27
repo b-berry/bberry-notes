@@ -1,7 +1,14 @@
 import urllib3
 
-# First, create a string variable called ori that is equal to the Vibrio cholerae ori. Don't forget to enclose your string in quotes!
+def PatternCount(Text, Pattern):
+    print("INFO: Searching for k-mer: {}".format(Pattern))
+    count = 0
+    for i in range(len(Text)-len(Pattern)+1):
+        if Text[i:i+len(Pattern)] == Pattern:
+            count = count+1
+    return count
 
+# First, create a string variable called ori that is equal to the Vibrio cholerae ori. Don't forget to enclose your string in quotes!
 url = "https://bioinformaticsalgorithms.com/data/realdatasets/Replication/v_cholerae_oric.txt"
 http = urllib3.PoolManager()
 
@@ -17,3 +24,9 @@ except urllib3.exceptions.NewConnectionError:
 
 # Then, print the length of ori
 print("INFO: ori length: {}".format(len(ori_raw)))
+
+# Then print  the number of times that the string Pattern = "TGATCA" occurs in the string Text corresponding to the Vibrio cholerae ori
+Pattern = "TGATCA"
+
+result = PatternCount(ori_raw, Pattern)
+print("INFO: ori contains: {} instances of {} k-mer".format(result, Pattern))

@@ -7,11 +7,11 @@ http = urllib3.PoolManager()
 
 print("INFO: Fetching string ori from url: {url}...")
 try:
-    r = http.request('GET', url)
+    r = http.request('GET', url, timeout=6.0)
     if r.status == 200:
       ori_raw = r.data.decode('utf-8')
       print(ori_raw)
-except:
+except urllib3.exceptions.NewConnectionError:
     print("ERROR: Failed to GET ori from url: {url}")
     exit(1)
 
